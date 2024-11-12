@@ -2,4 +2,4 @@ wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.
 sudo dpkg -i packages-microsoft-prod.deb
 
 wget https://download.visualstudio.microsoft.com/download/pr/ed4ed742-b86c-4784-8aa2-3dca0b46f3a8/e6c0c7f21d6e4f44be0a0a7e08e1676b/dotnet-sdk-3.1.412-linux-x64.tar.gz
-
+wget https://download.visualstudio.microsoft.com/download/pr/e89c4f00-5cbb-4810-897d-f5300165ee60/027ace0fdcfb834ae0a13469f0b1a4c8/dotnet-sdk-3.1.426-linux-x64.tar.gz
