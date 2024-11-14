@@ -1,0 +1,47 @@
+@{
+    ViewData["Title"] = "Task Manager";
+}
+
+<h1>Task Manager</h1>
+
+<div id="tasks"></div>
+
+<form id="taskForm">
+    <input type="text" id="title" placeholder="Title" required />
+    <textarea id="description" placeholder="Description"></textarea>
+    <button type="submit">Add Task</button>
+</form>
+
+<script>
+    async function fetchTasks() {
+        const response = await fetch('/api/tasks');
+        const tasks = await response.json();
+        const tasksDiv = document.getElementById('tasks');
+        tasksDiv.innerHTML = '';
+        tasks.forEach(task => {
+            const taskElement = document.createElement('div');
+            taskElement.innerHTML = `<strong>${task.title}</strong> - ${task.description} - ${task.isCompleted ? "Completed" : "Pending"}`;
+            tasksDiv.appendChild(taskElement);
+        });
+    }
+
+    document.getElementById('taskForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const title = document.getElementById('title').value;
+        const description = document.getElementById('description').value;
+
+        await fetch('/api/tasks', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title, description, isCompleted: false })
+        });
+
+        document.getElementById('title').value = '';
+        document.getElementById('description').value = '';
+        fetchTasks();
+    });
+
+    fetchTasks();
+</script>
